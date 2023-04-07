@@ -45,7 +45,7 @@ exports.downloadExpense = async (req, res, next) => {
   // });
   res.status(200).json({ success: true, fileUrl: downloadLink });
 } catch (error) {
-  console.log("error occured: ", error)
+  //console.log("error occured: ", error)
   res.status(500).json({ success: false, error:error });
 }
 };
