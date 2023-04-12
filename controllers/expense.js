@@ -6,15 +6,11 @@ const S3Services= require('../services/s3Services.js')
 const https=require('https')
 const fs=require('fs')
 
-// exports.getExpenses=async(req,res,next)=>{
-// let expenses= await Expense.findAll({where:{userId:req.user.id}});
-// console.log('<gettingAllExpenses>',expenses);
-// res.send({expenses:expenses})
-// }
-// const downloadexpense=async (req,res)=>{
-//     const expenses = await req.user.getExpenses()
-//     console.log(expenses)
-// }
+exports.getExpenses=async(req,res,next)=>{
+let expenses= await Expense.findAll({where:{userId:req.user.id}});
+console.log('<gettingAllExpenses>',expenses);
+res.send({expenses:expenses})
+}
 
 exports.downloadExpense = async (req, res, next) => {
   try {
@@ -39,10 +35,7 @@ exports.downloadExpense = async (req, res, next) => {
        console.log("Download Completed");
    });
 });
-  // await req.user.createDownload({
-  //   fileName: `${new Date()}`,
-  //   link: `${downloadLink}`,
-  // });
+  
   res.status(200).json({ success: true, fileUrl: downloadLink });
 } catch (error) {
   //console.log("error occured: ", error)
@@ -51,25 +44,12 @@ exports.downloadExpense = async (req, res, next) => {
 };
 
 
-// exports.previousDownload = (req, res, next) => {
-//   req.user
-//     .getDownloads()
-//     .then((downloads) => {
-//       res.status(200).json({ success: true, links: downloads });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json({ success: false, error: err });
-//     });
-// };
 
 
 
 exports.addExpense= async(req,res,next)=>{
     console.log("we are in ");
-    let a=(req.body.amount);
-    req.user.totalExpense= Number(req.user.totalExpense)+Number(a)
-    await req.user.save()
+    
 
     
 
@@ -163,13 +143,14 @@ exports.updateExpense=(req,res,next)=>{
 
 
 
-exports.deleteExpense = (req, res, next) => {
-  const expId = req.params.expenseId;
+exports.deleteExpense = async (req, res, next) => {
+  const expId = req.params.expanseId;
   console.log("expId: ", expId)
   req.user
     .getExpenses({ where: { id: expId } })
     .then((expenses) => {
       const expense = expenses[0];
+      console.log('$%^&*$%^&IOP',typeof(expense.ammount))
       expense.destroy();
       res.status(201).json({ message: "Deleted successfully" });
     })

@@ -33,7 +33,7 @@ exports.login =async (req,res,next)=>{
         }
         let pass_check=await bcrypt.compare(req.body.password ,user[0].password)
         function generateAccessToken(id,name,premium){
-            return jwt.sign({userId:id,name:name,hasPremium:premium},'abc')
+            return jwt.sign({userId:id,name:name,hasPremium:premium},process.env.Token_Secret)
         }
         console.log(pass_check)
             if(!pass_check){
@@ -45,17 +45,24 @@ exports.login =async (req,res,next)=>{
         }catch(err){console.log(err)}
 }
 exports.premiumLeaderboard=async(req,res)=>{
-    try{
-    const result =await User.findAll({
-        attributes: [
-          "id","name","totalExpense",
-        ],
-        order: [["totalExpense", "DESC"]],
-      })
-    console.log('@#$%^&*#$%^&',result)
-     res.send(result);
 
-    }catch(err){console.log(err)}
+    try {    
+        const leaderBoard= await User.findAll({
+            attributes:['id','name',[sequelize.fn('sum',sequelize.col('expenses.ammount')),'totalExpense']],
+            include:[
+                {
+                    model:Expanse,
+                    attributes:[]
+                }
+            ],
+            group:['users.id'],
+            order:[['totalExpense','DESC']]
+        })
+        return res.json(leaderBoard);        
+    } catch (error) {
+        res.json(error);
+    }
+
     
 }
 
