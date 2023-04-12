@@ -21,6 +21,9 @@ const loginRoutes=require('./routes/login.js');
 const passwordRoutes=require('./routes/password.js');
 const purchaseRoutes=require('./routes/purchase.js');
 const expenseRoutes=require('./routes/expenses.js');
+const { register } = require('./controllers/signUp.js');
+
+
 
 
 app.use(cors())
@@ -29,6 +32,11 @@ app.use(loginRoutes);
 app.use(passwordRoutes);
 app.use(purchaseRoutes);
 app.use(expenseRoutes);
+
+app.use((req, res)=>{
+    res.sendFile(path.join(__dirname, "public/register/signup.html"))
+
+})
 
 
 Expense.belongsTo(User,{constraints:true,onDelete:'CASCADE'}),

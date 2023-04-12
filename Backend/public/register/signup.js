@@ -18,7 +18,7 @@ async function signup(e){
             password.value='';
             email.value="";
            let res;
-            const url='http://localhost:3000/user/signup';
+            const url='http://ec2-65-0-75-38.ap-south-1.compute.amazonaws.com:3000/user/signup';
             try {
                 res=await axios.post(url,newuser);
                 console.log(res);
