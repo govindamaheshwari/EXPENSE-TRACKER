@@ -14,7 +14,7 @@ async function login(e){
             email.value="";
             password.value="";
             let res;
-            const url='http://ec2-65-0-75-38.ap-south-1.compute.amazonaws.com:3000/user/login';
+            const url=`http://ec2-65-0-75-38.ap-south-1.compute.amazonaws.com:3000/user/login`;
                 res=await axios.post(url,object);
                 if(res.data.success===true){
                 console.log("response of post ",res.data);

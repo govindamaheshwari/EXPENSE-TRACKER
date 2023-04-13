@@ -50,6 +50,6 @@ User.hasMany(Forgotpassword)
 sequelize
     .sync()
     .then(()=>{
-        app.listen(process.env.port || 3000);
+        app.listen(3000, ()=>{console.log("server started>>>.......")});
     })
     .catch(error=>console.log(error));

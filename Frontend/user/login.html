@@ -10,32 +10,25 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
     <div id="container">
-        <h1>Please Sign Up or Login.</h1>
-        <div id="form-signup">
+        <h1>Please Login.</h1>
+        <div id="form-login">
             <form method="post">
-                <label for="name">Name</label>
-                <input type="text" id="name" required>
                 <label for="email">Email</label>
                 <input type="email" name="" id="email" required>
                 <label for="password">Password</label>
                 <input type="password" name="" id="password" required>
                 <div class="clearfix">
-                    <button type="submit" id="signbutton" class="signup">Sign up</button>
+                    <button type="submit" id="loginbutton">Sign in</button>    
                 </div>
             </form>
         </div>
-        <a href="./login.html">Log in</a>
+        <a href="./signup.html">Sign up</a>
         <div id="notif" class="notif">
 
         </div>
-     
-
-
-
-
-
-
+        <button id="forgotpassword">ForgotPassword</button>
     </div>
-    <script src="signup.js"></script>
+    
+    <script src="login.js"></script>
 </body>
 </html>
