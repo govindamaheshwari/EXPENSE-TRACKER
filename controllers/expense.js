@@ -1,3 +1,4 @@
+console.log("helloworld")
 const Expense = require('../models/expense.js');
 const Sequelize = require("sequelize");
 const Op=Sequelize.Op;
